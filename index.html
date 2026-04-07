@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YantraNova | Premium Websites & Digital Systems</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@latest"></script>
+<style>
+:root {
+--primary: #6366f1;
+--bg-dark: #050505;
+--card-bg: #111111;
+--text-gray: #9ca3af;
+}
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        -webkit-tap-highlight-color: transparent;
+    }
+    body {
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        background-color: var(--bg-dark);
+        color: #ffffff;
+        line-height: 1.6;
+        overflow-x: hidden;
+    }
+    /* --- VISIBILITY & FIXES --- */
+    section {
+        position: relative;
+        width: 100%;
+        display: block !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        padding: 80px 20px;
+    }
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+    /* --- UI ELEMENTS --- */
+    .glass {
+        background: rgba(20, 20, 20, 0.7);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    .gradient-text {
+        background: linear-gradient(135deg, #fff 30%, #6366f1 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+    .btn-premium {
+        background: #6366f1;
+        color: white;
+        font-weight: 700;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        overflow: hidden;
+    }
+    .btn-premium:hover {
+        transform: translateY(-3px) scale(1.02);
+        box-shadow: 0 12px 30px rgba(99, 102, 241, 0.5);
+        background: #4f46e5;
+    }
+    .btn-premium:active {
+        transform: translateY(0);
+    }
+    .card {
+        background: var(--card-bg);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        border-radius: 20px;
+        padding: 24px;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .card:hover {
+        border-color: rgba(99, 102, 241, 0.6);
+        transform: translateY(-8px);
+        background: rgba(255, 255, 255, 0.02);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    }
+    /* --- FORM PATCH (Patch 1) --- */
+    input, select, textarea {
+        background: #1a1a1a !important;
+        border: 1px solid #333 !important;
+        color: white !important;
+        outline: none !important;
+        width: 100%;
+        transition: border-color 0.3s ease;
+    }
+    input:focus, select:focus, textarea:focus {
+        border-color: var(--primary) !important;
+    }
+    
+    /* Responsive Contact Area Fix */
+    #contact .container {
+        padding: 0 15px;
+    }
+    @media (max-width: 768px) {
+        #contact .grid {
+            display: flex;
+            flex-direction: column;
+        }
+        #contact .glass {
+            border-radius: 24px;
+        }
+        #contact input, #contact select, #contact textarea {
+            font-size: 16px; /* Prevents iOS zoom */
+            padding: 12px;
+        }
+        #contact .p-8 {
+            padding: 1.5rem;
+        }
+    }
+
+    /* --- ANIMATIONS (Patch 2) --- */
+    .reveal {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .reveal.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    
+    .floating {
+        animation: floating 4s ease-in-out infinite;
+    }
+    @keyframes floating {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-15px); }
+    }
+    .mobile-nav {
+        transform: translateX(100%);
+        transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .mobile-nav.active {
+        transform: translateX(0);
+    }
+    #success-msg { display: none; }
+    
+    @media (max-width: 768px) {
+        section { padding: 60px 15px; }
+        .hero-title { font-size: 2.75rem; line-height: 1.1; }
+    }
+</style>
+</head>
+<body>
+<nav class="fixed top-0 left-0 w-full z-[100] glass border-b border-white/5 py-4 px-6">
+    <div class="max-w-7xl mx-auto flex justify-between items-center">
+        <div class="text-xl font-extrabold tracking-tighter uppercase">YantraNova</div>
+        
+        <div class="hidden md:flex space-x-8 text-sm font-medium">
+            <a href="#home" class="hover:text-indigo-400 transition-colors">Home</a>
+            <a href="#services" class="hover:text-indigo-400 transition-colors">Services</a>
+            <a href="#pricing" class="hover:text-indigo-400 transition-colors">Pricing</a>
+            <a href="#faq" class="hover:text-indigo-400 transition-colors">FAQ</a>
+            <a href="#contact" class="hover:text-indigo-400 transition-colors">Contact</a>
+        </div>
+        <div class="flex items-center gap-4">
+            <a href="#contact" class="hidden sm:block btn-premium px-5 py-2 rounded-full text-xs">Build My Website</a>
+            <button id="menu-toggle" class="md:hidden"><i data-lucide="menu"></i></button>
+        </div>
+    </div>
+</nav>
+
+<div id="mobile-menu" class="fixed inset-0 z-[110] bg-black mobile-nav flex flex-col items-center justify-center space-y-8 text-2xl font-bold">
+    <button id="menu-close" class="absolute top-6 right-6"><i data-lucide="x" class="w-8 h-8"></i></button>
+    <a href="#home" class="nav-link">Home</a>
+    <a href="#services" class="nav-link">Services</a>
+    <a href="#pricing" class="nav-link">Pricing</a>
+    <a href="#faq" class="nav-link">FAQ</a>
+    <a href="#contact" class="nav-link">Contact</a>
+</div>
+
+<section id="home" class="pt-32 pb-20 md:pt-48 reveal">
+    <div class="container text-center">
+        <div class="inline-block bg-indigo-500/10 border border-indigo-500/20 px-4 py-1 rounded-full text-xs font-bold text-indigo-400 mb-6 uppercase tracking-widest">
+            Starting at just ₹599
+        </div>
+        <h1 class="hero-title text-4xl md:text-7xl font-extrabold mb-6 tracking-tight">
+            Powerful Online Systems <br><span class="gradient-text">Built for Real Growth</span>
+        </h1>
+        <p class="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto mb-10 px-4">
+            We engineer high-performance websites and management tools for schools, clinics, restaurants, and local brands.
+        </p>
+        <div class="flex flex-col sm:flex-row justify-center gap-4 px-6">
+            <a href="#contact" class="btn-premium px-8 py-4 rounded-xl text-lg">Get Started</a>
+            <a href="#services" class="px-8 py-4 border border-white/10 rounded-xl font-bold hover:bg-white/5 transition-all">View Solutions</a>
+        </div>
+        <div class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-4 px-4 opacity-80">
+            <div class="card floating" style="animation-delay: 0s;">
+                <div class="h-2 w-12 bg-indigo-500/30 rounded mb-2"></div>
+                <div class="text-xs text-left">Result Portal</div>
+            </div>
+            <div class="card floating" style="animation-delay: 0.5s;">
+                <div class="h-2 w-12 bg-green-500/30 rounded mb-2"></div>
+                <div class="text-xs text-left">Doctor Appt.</div>
+            </div>
+            <div class="card floating" style="animation-delay: 1s;">
+                <div class="h-2 w-12 bg-orange-500/30 rounded mb-2"></div>
+                <div class="text-xs text-left">Kitchen Panel</div>
+            </div>
+            <div class="card floating" style="animation-delay: 1.5s;">
+                <div class="h-2 w-12 bg-blue-500/30 rounded mb-2"></div>
+                <div class="text-xs text-left">Lead Manager</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="w-full bg-white/[0.02] border-y border-white/5 py-8 overflow-hidden">
+    <div class="flex flex-wrap justify-center gap-8 md:gap-16 px-6 opacity-40 grayscale">
+        <span class="flex items-center gap-2 font-bold"><i data-lucide="smartphone" class="w-4 h-4"></i> Mobile Friendly</span>
+        <span class="flex items-center gap-2 font-bold"><i data-lucide="zap" class="w-4 h-4"></i> Fast Delivery</span>
+        <span class="flex items-center gap-2 font-bold"><i data-lucide="shield-check" class="w-4 h-4"></i> Firebase Powered</span>
+        <span class="flex items-center gap-2 font-bold"><i data-lucide="database" class="w-4 h-4"></i> Real-Time</span>
+    </div>
+</div>
+
+<section id="why" class="bg-black reveal">
+    <div class="container">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl md:text-5xl font-extrabold mb-4">Why Choose YantraNova?</h2>
+            <div class="w-20 h-1 bg-indigo-500 mx-auto rounded-full"></div>
+        </div>
+        <div class="grid md:grid-cols-3 gap-6 px-4">
+            <div class="card">
+                <i data-lucide="cpu" class="text-indigo-500 mb-4 w-10 h-10"></i>
+                <h3 class="text-xl font-bold mb-2">Modern Tech Stack</h3>
+                <p class="text-gray-400 text-sm">We use Firebase and high-speed CDNs to ensure your site never lags.</p>
+            </div>
+            <div class="card">
+                <i data-lucide="smartphone" class="text-indigo-500 mb-4 w-10 h-10"></i>
+                <h3 class="text-xl font-bold mb-2">Mobile Optimized</h3>
+                <p class="text-gray-400 text-sm">90% of your users are on mobile. We build for them first.</p>
+            </div>
+            <div class="card">
+                <i data-lucide="lock" class="text-indigo-500 mb-4 w-10 h-10"></i>
+                <h3 class="text-xl font-bold mb-2">Secure Admin Panel</h3>
+                <p class="text-gray-400 text-sm">Manage your leads and data through a private, encrypted dashboard.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="services" class="bg-[#080808] reveal">
+    <div class="container">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl md:text-5xl font-extrabold mb-4">Industry Specific Solutions</h2>
+            <p class="text-gray-500">Custom engineered systems starting at ₹599</p>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 px-4">
+            <div class="card">
+                <h4 class="font-bold mb-2">Schools</h4>
+                <p class="text-xs text-gray-500">Result systems, inquiry forms, and faculty lists.</p>
+            </div>
+            <div class="card">
+                <h4 class="font-bold mb-2">Hospitals</h4>
+                <p class="text-xs text-gray-500">Doctor profiles and appointment booking systems.</p>
+            </div>
+            <div class="card">
+                <h4 class="font-bold mb-2">Restaurants</h4>
+                <p class="text-xs text-gray-500">Digital menus, DHABA management, and order tracking.</p>
+            </div>
+            <div class="card">
+                <h4 class="font-bold mb-2">Cloud Kitchens</h4>
+                <p class="text-xs text-gray-500">WhatsApp integrated ordering and lead management.</p>
+            </div>
+            <div class="card">
+                <h4 class="font-bold mb-2">Coaching</h4>
+                <p class="text-xs text-gray-500">Batch schedules and student registration portals.</p>
+            </div>
+            <div class="card">
+                <h4 class="font-bold mb-2">Local Brands</h4>
+                <p class="text-xs text-gray-500">Premium portfolio websites to showcase work.</p>
+            </div>
+            <div class="card">
+                <h4 class="font-bold mb-2">Booking Systems</h4>
+                <p class="text-xs text-gray-500">Custom forms to collect leads and data.</p>
+            </div>
+            <div class="card">
+                <h4 class="font-bold mb-2">Backends</h4>
+                <p class="text-xs text-gray-500">Full Firebase Firestore integration for security.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="how" class="bg-black reveal">
+    <div class="container px-6">
+        <h2 class="text-3xl font-extrabold text-center mb-12">Launch in 5 Simple Steps</h2>
+        <div class="space-y-6 max-w-lg mx-auto">
+            <div class="flex gap-4 items-start">
+                <div class="bg-indigo-600 text-white w-8 h-8 rounded-full flex items-center justify-center shrink-0 font-bold">1</div>
+                <div><h4 class="font-bold">Consultation</h4><p class="text-sm text-gray-500">Tell us your business needs and requirements.</p></div>
+            </div>
+            <div class="flex gap-4 items-start">
+                <div class="bg-indigo-600 text-white w-8 h-8 rounded-full flex items-center justify-center shrink-0 font-bold">2</div>
+                <div><h4 class="font-bold">Design</h4><p class="text-sm text-gray-500">We create a premium mobile-first prototype.</p></div>
+            </div>
+            <div class="flex gap-4 items-start">
+                <div class="bg-indigo-600 text-white w-8 h-8 rounded-full flex items-center justify-center shrink-0 font-bold">3</div>
+                <div><h4 class="font-bold">Development</h4><p class="text-sm text-gray-500">We integrate the backend and real-time database.</p></div>
+            </div>
+            <div class="flex gap-4 items-start">
+                <div class="bg-indigo-600 text-white w-8 h-8 rounded-full flex items-center justify-center shrink-0 font-bold">4</div>
+                <div><h4 class="font-bold">Testing</h4><p class="text-sm text-gray-500">Rigorous checks for speed and mobile responsiveness.</p></div>
+            </div>
+            <div class="flex gap-4 items-start">
+                <div class="bg-indigo-600 text-white w-8 h-8 rounded-full flex items-center justify-center shrink-0 font-bold">5</div>
+                <div><h4 class="font-bold">Launch</h4><p class="text-sm text-gray-500">Your site goes live and you start getting leads.</p></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="bg-[#050505] reveal">
+    <div class="container px-4">
+        <h2 class="text-3xl font-extrabold text-center mb-12">Realistic System Previews</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="glass p-6 rounded-3xl border-indigo-500/10 hover:border-indigo-500/40 transition-all">
+                <div class="flex justify-between items-center mb-4">
+                    <span class="text-[10px] font-bold text-indigo-400">SCHOOL SYSTEM</span>
+                    <div class="w-2 h-2 rounded-full bg-green-500"></div>
+                </div>
+                <div class="space-y-2">
+                    <div class="h-3 w-full bg-white/5 rounded"></div>
+                    <div class="h-3 w-2/3 bg-white/5 rounded"></div>
+                    <div class="h-8 w-full bg-indigo-500/20 rounded-lg mt-4 flex items-center justify-center text-[10px]">View My Result</div>
+                </div>
+            </div>
+            <div class="glass p-6 rounded-3xl border-indigo-500/10 hover:border-indigo-500/40 transition-all">
+                <div class="flex justify-between items-center mb-4">
+                    <span class="text-[10px] font-bold text-blue-400">HOSPITAL PORTAL</span>
+                    <i data-lucide="calendar" class="w-3 h-3 text-blue-400"></i>
+                </div>
+                <div class="space-y-2">
+                    <div class="h-10 w-full bg-white/5 rounded-lg border border-white/10"></div>
+                    <div class="h-8 w-full bg-blue-500/20 rounded-lg mt-4 flex items-center justify-center text-[10px]">Book Appointment</div>
+                </div>
+            </div>
+            <div class="glass p-6 rounded-3xl border-indigo-500/10 hover:border-indigo-500/40 transition-all">
+                <div class="flex justify-between items-center mb-4">
+                    <span class="text-[10px] font-bold text-orange-400">RESTAURANT PANEL</span>
+                    <i data-lucide="shopping-bag" class="w-3 h-3 text-orange-400"></i>
+                </div>
+                <div class="grid grid-cols-2 gap-2">
+                    <div class="h-12 bg-white/5 rounded"></div>
+                    <div class="h-12 bg-white/5 rounded"></div>
+                </div>
+                <div class="h-8 w-full bg-orange-500/20 rounded-lg mt-4 flex items-center justify-center text-[10px]">Place Order</div>
+            </div>
+            <div class="glass p-6 rounded-3xl border-indigo-500/10 hover:border-indigo-500/40 transition-all">
+                <div class="flex justify-between items-center mb-4">
+                    <span class="text-[10px] font-bold text-indigo-400">ADMIN DASHBOARD</span>
+                    <i data-lucide="lock" class="w-3 h-3 text-indigo-400"></i>
+                </div>
+                <div class="space-y-2">
+                    <div class="flex justify-between"><div class="h-2 w-8 bg-white/10 rounded"></div><div class="h-2 w-4 bg-green-500/40 rounded"></div></div>
+                    <div class="flex justify-between"><div class="h-2 w-12 bg-white/10 rounded"></div><div class="h-2 w-4 bg-green-500/40 rounded"></div></div>
+                    <div class="h-12 w-full bg-white/5 rounded mt-2"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="bg-indigo-600/5 reveal">
+    <div class="container grid grid-cols-2 md:grid-cols-4 gap-8 text-center px-6">
+        <div><h3 class="text-4xl font-extrabold text-indigo-500">50+</h3><p class="text-gray-500 text-xs uppercase tracking-tighter">Projects Delivered</p></div>
+        <div><h3 class="text-4xl font-extrabold text-indigo-500">₹599</h3><p class="text-gray-500 text-xs uppercase tracking-tighter">Entry Price</p></div>
+        <div><h3 class="text-4xl font-extrabold text-indigo-500">100%</h3><p class="text-gray-500 text-xs uppercase tracking-tighter">Mobile Ready</p></div>
+        <div><h3 class="text-4xl font-extrabold text-indigo-500">24/7</h3><p class="text-gray-500 text-xs uppercase tracking-tighter">Real-time Support</p></div>
+    </div>
+</section>
+
+<section id="pricing" class="bg-black reveal">
+    <div class="container px-6">
+        <div class="max-w-xl mx-auto glass p-8 md:p-12 rounded-[40px] border-indigo-500/30 text-center">
+            <h2 class="text-3xl font-extrabold mb-4">Transparent Pricing</h2>
+            <div class="text-6xl font-black mb-6"><span class="text-2xl font-normal text-gray-500">Starting at</span> ₹599</div>
+            <p class="text-gray-400 mb-8">No hidden monthly fees. One-time setup with scalable options as you grow.</p>
+            <ul class="text-left space-y-4 mb-10 max-w-xs mx-auto">
+                <li class="flex items-center gap-3"><i data-lucide="check" class="text-green-500 w-5 h-5"></i> Mobile Website</li>
+                <li class="flex items-center gap-3"><i data-lucide="check" class="text-green-500 w-5 h-5"></i> Lead Collection System</li>
+                <li class="flex items-center gap-3"><i data-lucide="check" class="text-green-500 w-5 h-5"></i> Admin Access</li>
+                <li class="flex items-center gap-3"><i data-lucide="check" class="text-green-500 w-5 h-5"></i> WhatsApp Integration</li>
+            </ul>
+            <a href="#contact" class="btn-premium w-full py-4 rounded-2xl text-xl">Get Started Now</a>
+        </div>
+    </div>
+</section>
+
+<section class="bg-[#050505] reveal">
+    <div class="container px-6">
+        <h2 class="text-3xl font-extrabold text-center mb-12">Client Stories</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="card italic text-sm text-gray-400">
+                "YantraNova built our school result system in just 3 days. Our parents are very happy."
+                <div class="mt-4 not-italic font-bold text-white">- Rajesh Sharma (School Owner)</div>
+            </div>
+            <div class="card italic text-sm text-gray-400">
+                "The hospital booking form works perfectly. No more long queues at the clinic."
+                <div class="mt-4 not-italic font-bold text-white">- Dr. Anjali Verma (Clinic)</div>
+            </div>
+            <div class="card italic text-sm text-gray-400">
+                "Digital menu and ordering saved our restaurant during peak hours. Highly recommended."
+                <div class="mt-4 not-italic font-bold text-white">- Vikram Singh (Food Point)</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="faq" class="bg-black reveal">
+    <div class="container max-w-2xl px-6">
+        <h2 class="text-3xl font-extrabold text-center mb-12">Questions? We Have Answers</h2>
+        <div class="space-y-4">
+            <details class="glass p-4 rounded-xl cursor-pointer group">
+                <summary class="font-bold list-none flex justify-between items-center">
+                    How much time does it take?
+                    <i data-lucide="chevron-down" class="w-4 h-4 transition-transform group-open:rotate-180"></i>
+                </summary>
+                <p class="text-sm text-gray-500 mt-2">Standard websites are ready in 48 hours. Complex systems take 5-7 days.</p>
+            </details>
+            <details class="glass p-4 rounded-xl cursor-pointer group">
+                <summary class="font-bold list-none flex justify-between items-center">
+                    Is the ₹599 plan for real?
+                    <i data-lucide="chevron-down" class="w-4 h-4 transition-transform group-open:rotate-180"></i>
+                </summary>
+                <p class="text-sm text-gray-500 mt-2">Yes! We provide entry-level professional landing pages at this cost to help small businesses start online.</p>
+            </details>
+            <details class="glass p-4 rounded-xl cursor-pointer group">
+                <summary class="font-bold list-none flex justify-between items-center">
+                    Can I update results myself?
+                    <i data-lucide="chevron-down" class="w-4 h-4 transition-transform group-open:rotate-180"></i>
+                </summary>
+                <p class="text-sm text-gray-500 mt-2">Yes, every system comes with an admin login where you can manage your own data.</p>
+            </details>
+        </div>
+    </div>
+</section>
+
+<section class="bg-indigo-600/10 reveal">
+    <div class="container text-center px-6">
+        <div class="w-20 h-20 bg-indigo-600 mx-auto rounded-full mb-6 flex items-center justify-center font-black text-2xl">KP</div>
+        <h3 class="text-2xl font-extrabold">Kunal Pathak</h3>
+        <p class="text-indigo-400 font-bold mb-4">Founder & CEO, YantraNova</p>
+        <p class="max-w-xl mx-auto text-gray-400">"Our mission is to bring high-end technology to every local business in India at an affordable cost."</p>
+    </div>
+</section>
+
+<section id="contact" class="bg-black reveal">
+    <div class="container px-6">
+        <div class="max-w-4xl mx-auto glass rounded-[32px] md:rounded-[40px] overflow-hidden border border-white/5">
+            <div class="grid grid-cols-1 md:grid-cols-2">
+                <div class="p-8 md:p-12 bg-indigo-600 flex flex-col justify-center">
+                    <h2 class="text-4xl font-extrabold mb-6">Let's Talk</h2>
+                    <p class="mb-8 opacity-90">Take your business online today. Fill the form and our team will contact you within 2 hours.</p>
+                    <div class="space-y-6">
+                        <div class="flex items-center gap-4"><i data-lucide="phone" class="w-5 h-5"></i> 8521342918</div>
+                        <div class="flex items-center gap-4"><i data-lucide="mail" class="w-5 h-5"></i> yantranovapvt@gmail.com</div>
+                    </div>
+                </div>
+                <div class="p-8 md:p-12 bg-card-bg">
+                    <form id="lead-form" class="space-y-4">
+                        <input type="text" id="fullName" placeholder="Full Name" required class="p-4 rounded-xl">
+                        <input type="tel" id="phone" placeholder="Phone Number" required class="p-4 rounded-xl">
+                        <input type="text" id="businessName" placeholder="Business Name" required class="p-4 rounded-xl">
+                        <select id="businessType" required class="p-4 rounded-xl appearance-none">
+                            <option value="" disabled selected>Business Type</option>
+                            <option value="School">School</option>
+                            <option value="Hospital">Hospital</option>
+                            <option value="Restaurant">Restaurant</option>
+                            <option value="Small Business">Small Business</option>
+                            <option value="Other">Other</option>
+                        </select>
+                        <input type="text" id="city" placeholder="City" required class="p-4 rounded-xl">
+                        <input type="text" id="budget" placeholder="Budget (Optional)" class="p-4 rounded-xl">
+                        <textarea id="requirement" placeholder="Requirement" required class="p-4 rounded-xl h-24 resize-none"></textarea>
+                        
+                        <button type="submit" id="submit-btn" class="btn-premium w-full py-4 rounded-xl text-lg">Send Request</button>
+                    </form>
+                    <div id="success-msg" class="mt-4 p-4 bg-green-500/20 border border-green-500/50 rounded-xl text-green-500 text-center font-bold">
+                        Your form has been submitted successfully
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer class="bg-[#050505] pt-16 pb-8 border-t border-white/5">
+    <div class="container px-6">
+        <div class="grid md:grid-cols-4 gap-12 mb-12">
+            <div class="col-span-1 md:col-span-2">
+                <div class="text-2xl font-black mb-4">YantraNova</div>
+                <p class="text-gray-500 text-sm max-w-sm">We build high-performance digital systems for schools, hospitals, and local brands to help them scale in the modern world.</p>
+            </div>
+            <div>
+                <h5 class="font-bold mb-4">Quick Links</h5>
+                <ul class="text-gray-500 text-sm space-y-2">
+                    <li><a href="#home" class="hover:text-white transition-colors">Home</a></li>
+                    <li><a href="#services" class="hover:text-white transition-colors">Services</a></li>
+                    <li><a href="#pricing" class="hover:text-white transition-colors">Pricing</a></li>
+                </ul>
+            </div>
+            <div>
+                <h5 class="font-bold mb-4">Support</h5>
+                <p class="text-gray-500 text-sm">8521342918</p>
+                <p class="text-gray-500 text-sm">yantranovapvt@gmail.com</p>
+            </div>
+        </div>
+        <div class="text-center pt-8 border-t border-white/5 text-gray-600 text-xs">
+            © 2026 YantraNova Pvt Ltd. Built for growing businesses.
+        </div>
+    </div>
+</footer>
+
+<script type="module">
+    // Patch 4: REAL Firebase Integration
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+    import { getDatabase, ref, push } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyBf2a_Z32mEPNbKWqabAt5t6IOZpc7atE8",
+        authDomain: "yantranova-1ee7e.firebaseapp.com",
+        projectId: "yantranova-1ee7e",
+        storageBucket: "yantranova-1ee7e.firebasestorage.app",
+        messagingSenderId: "318654228413",
+        appId: "1:318654228413:web:ed821014d2bcc1ad5454d4",
+        measurementId: "G-X9K08BRZJE"
+    };
+
+
+    const app = initializeApp(firebaseConfig);
+    const database = getDatabase(app);
+
+    const leadForm = document.getElementById('lead-form');
+    const submitBtn = document.getElementById('submit-btn');
+    const successMsg = document.getElementById('success-msg');
+
+    leadForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<span class="flex items-center gap-2">Processing...</span>';
+
+        const lead = {
+            fullName: document.getElementById('fullName').value,
+            phone: document.getElementById('phone').value,
+            businessName: document.getElementById('businessName').value,
+            businessType: document.getElementById('businessType').value,
+            city: document.getElementById('city').value,
+            budget: document.getElementById('budget').value,
+            requirement: document.getElementById('requirement').value,
+            createdAt: new Date().toISOString()
+        };
+
+        try {
+            // Firestore Collection: leads
+            await push(ref(database, "leads"), lead);
+            
+            // UI Update
+            successMsg.style.display = 'block';
+            leadForm.reset();
+            
+            setTimeout(() => {
+                successMsg.style.display = 'none';
+            }, 5000);
+        } catch (err) {
+            alert("Error sending request. Please check your connection.");
+	    alert(err.message);
+            console.error(err);
+        } finally {
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Send Request';
+        }
+    });
+
+    // UI Logic & Patch 2: Animations
+    lucide.createIcons();
+
+    const observerOptions = {
+        threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    const menuToggle = document.getElementById('menu-toggle');
+    const menuClose = document.getElementById('menu-close');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    menuToggle.onclick = () => mobileMenu.classList.add('active');
+    menuClose.onclick = () => mobileMenu.classList.remove('active');
+    
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.onclick = () => mobileMenu.classList.remove('active');
+    });
+</script>
+</body>
+</html>
+
